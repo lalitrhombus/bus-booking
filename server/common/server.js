@@ -4,6 +4,11 @@ import * as bodyParser from 'body-parser';
 import * as http from 'http';
 import * as os from 'os';
 import cookieParser from 'cookie-parser';
+import mongoSanitize from 'express-mongo-sanitize';
+import helmet from 'helmet';
+import xss from 'xss-clean';
+
+import { getDBInstance } from './db';
 
 import oas from './oas';
 
@@ -25,7 +30,12 @@ export default class ExpressServer {
     );
     app.use(bodyParser.text({ limit: process.env.REQUEST_LIMIT || '100kb' }));
     app.use(cookieParser(process.env.SESSION_SECRET));
-    app.use(Express.static(`${root}/public`));
+
+    app.use(mongoSanitize());
+    app.use(helmet());
+    app.use(xss());
+    // Stoping static content serving for now
+    // app.use(Express.static(`${root}/public`));
   }
 
   router(routes) {
@@ -33,13 +43,19 @@ export default class ExpressServer {
     return this;
   }
 
-  listen(port = process.env.PORT) {
+  async listen(port = process.env.PORT) {
     const welcome = (p) => () =>
       l.info(
         `up and running in ${
           process.env.NODE_ENV || 'development'
         } @: ${os.hostname()} on port: ${p}}`
       );
+
+    const db = await getDBInstance();
+    if (!db) {
+      l.error(`Not able to connect to DB ... Please Varify again..`);
+      exit(1);
+    }
 
     oas(app, this.routes)
       .then(() => {

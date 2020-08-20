@@ -18,8 +18,14 @@
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.0.0",
+    "express-openapi-validator": "^3.16.7",
+    "helmet": "^4.1.0",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.10.0",
     "pino": "^6.4.0",
-    "express-openapi-validator": "^3.16.7"
+    "xss": "^1.0.8",
+    "xss-clean": "^0.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

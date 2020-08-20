@@ -11,7 +11,7 @@ tags:
   - name: Specification
     description: The swagger API specification
 paths:
-  /examples:
+  /{id}:
     get:
       tags:
         - Examples
@@ -67,44 +67,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /examples/{id}:
-    get:
-      tags:
-        - Examples
-      parameters:
-        - name: id
-          in: path
-          description: The id of the example to retrieve
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Return the example with the specified id
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Example'
-        4XX:
-          description: Example not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        5XX:
-          description: Example not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /spec:
-    get:
-      tags:
-        - Specification
-      responses:
-        200:
-          description: Return the API specification
-          content: {}
 components:
   schemas:
     Example:
