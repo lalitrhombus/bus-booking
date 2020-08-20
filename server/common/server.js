@@ -43,7 +43,7 @@ export default class ExpressServer {
     return this;
   }
 
-  async listen(port = process.env.PORT) {
+  listen(port = process.env.PORT) {
     const welcome = (p) => () =>
       l.info(
         `up and running in ${
@@ -51,7 +51,7 @@ export default class ExpressServer {
         } @: ${os.hostname()} on port: ${p}}`
       );
 
-    const db = await getDBInstance();
+    const db = getDBInstance();
     if (!db) {
       l.error(`Not able to connect to DB ... Please Varify again..`);
       exit(1);
