@@ -2,7 +2,7 @@ import dbService from '../../services/db.service';
 
 export class Controller {
   all(req, res) {
-    dbService.all('Album').then((r) => res.json(r));
+    dbService.all('Vehicle').then((r) => res.json(r));
   }
 
   byId(req, res) {
