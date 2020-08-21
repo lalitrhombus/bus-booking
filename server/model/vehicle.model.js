@@ -15,7 +15,7 @@ var seatSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['BUS']
+    enum: ['BUS'],
   },
   location: {
     type: [Number],
