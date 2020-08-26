@@ -2,6 +2,18 @@ var mongoose = require('mongoose');
 const dbInstance = require('../common/db') && mongoose;
 
 var userSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    maxlength: 120,
+    required: true,
+    unique: true,
+  },
+  userName: {
+    type: String,
+    maxlength: 120,
+    required: true,
+    unique: true,
+  },
   name: {
     type: String,
     maxlength: 120,

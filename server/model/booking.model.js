@@ -29,7 +29,7 @@ var passengerSchema = new mongoose.Schema({
 });
 
 var bookingSchema = new mongoose.Schema({
-  referenceId: {
+  id: {
     type: String,
     maxlength: 120,
     required: true,

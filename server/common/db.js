@@ -12,6 +12,8 @@ const getDBInstance = async () => {
 
     dbInstance = await mongoose.connect(process.env.MONGO_DB_SERVER_URI, {
       useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
       useUnifiedTopology: true,
     });
 
@@ -21,6 +23,7 @@ const getDBInstance = async () => {
   } catch (err) {
     // TODO: add a retry machanish here, or may be an alternative source of data
     l.error(err);
+    console.log('i am here');
     return null;
   }
 };

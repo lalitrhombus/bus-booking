@@ -3,7 +3,7 @@ module.exports = {
     await db.collection('bookings').insertMany(
       [
         {
-          referenceId: 'booking0',
+          id: 'booking0',
           bookingDate: Date(),
           payment: 530,
           vehicle: 'bus1',
@@ -31,7 +31,7 @@ module.exports = {
           updatedBy: 2,
         },
         {
-          referenceId: 'booking1',
+          id: 'booking1',
           bookingDate: Date(),
           payment: 530,
           vehicle: 'bus1',
@@ -59,7 +59,7 @@ module.exports = {
           updatedBy: 2,
         },
         {
-          referenceId: 'booking2',
+          id: 'booking2',
           bookingDate: Date(),
           payment: 530,
           vehicle: 'bus1',
@@ -87,7 +87,7 @@ module.exports = {
           updatedBy: 2,
         },
         {
-          referenceId: 'booking3',
+          id: 'booking3',
           bookingDate: Date(),
           payment: 530,
           vehicle: 'bus1',

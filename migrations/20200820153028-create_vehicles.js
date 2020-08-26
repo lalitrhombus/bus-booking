@@ -3,7 +3,7 @@ module.exports = {
     await db.collection('vehicles').insertMany(
       [
         {
-          name: 'test Bus 1',
+          id: 'test Bus 1',
           route: 'Delhi-Mumbai',
           type: 'BUS',
           facility: {
@@ -51,7 +51,7 @@ module.exports = {
           ],
         },
         {
-          name: 'test Bus 2',
+          id: 'test Bus 2',
           route: 'Delhi-Mumbai',
           type: 'BUS',
           facility: {
@@ -99,7 +99,7 @@ module.exports = {
           ],
         },
         {
-          name: 'test Bus 3',
+          id: 'test Bus 3',
           route: 'Delhi-Mumbai',
           type: 'BUS',
           facility: {
@@ -147,7 +147,7 @@ module.exports = {
           ],
         },
         {
-          name: 'test Bus 4',
+          id: 'test Bus 4',
           route: 'Delhi-Mumbai',
           facility: {
             wifi: true,

@@ -3,25 +3,26 @@ let models = require('../../model');
 class Database {
   constructor() {}
 
-  all(collection) {
+  findAll(collection) {
     return models[collection].find();
   }
 
-  byId(id) {
-    return Promise.resolve(this._data[id]);
+  findOne(collection, condition) {
+    return models[collection].findOne({ ...condition });
   }
 
-  // insert() {
-  //   const record = {
-  //     id: this._counter,
-  //     name,
-  //   };
+  create(collection, data) {
+    try {
+      return models[collection].create({ ...data });
+    } catch (err) {
+      return err;
+    }
+  }
 
-  //   this._counter += 1;
-  //   this._data.push(record);
-
-  //   return Promise.resolve(record);
-  // }
+  update(collection, condition, data) {
+    models = require('../../model');
+    return models[collection].update({ ...condition }, { ...data });
+  }
 }
 
 export default new Database();

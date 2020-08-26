@@ -6,16 +6,11 @@ var seatSchema = new mongoose.Schema({
     type: String,
     maxlength: 120,
     required: true,
-    unique: true,
+    unique: false,
   },
   layer: {
     type: Number,
     maxlength: 1,
-  },
-  type: {
-    type: String,
-    required: true,
-    enum: ['BUS'],
   },
   location: {
     type: [Number],
@@ -33,7 +28,7 @@ var seatSchema = new mongoose.Schema({
 });
 
 var vehicleSchema = new mongoose.Schema({
-  name: {
+  id: {
     type: String,
     maxlength: 120,
     required: true,
@@ -42,6 +37,11 @@ var vehicleSchema = new mongoose.Schema({
   route: {
     type: String,
     required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+    enum: ['BUS'],
   },
   facility: {
     type: JSON,
