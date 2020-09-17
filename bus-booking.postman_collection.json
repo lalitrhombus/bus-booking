@@ -1,0 +1,564 @@
+{
+	"info": {
+		"_postman_id": "8836facf-c5bd-48a0-82ce-e3fc03c83f61",
+		"name": "bus-booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}users/",
+							"host": [
+								"{{API_URL}}users"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"alpha\",\n    \"name\": \"alpha\",\n    \"email\": \"alpha@gmail.com\",\n    \"contactNumber\": \"8743850717\",\n    \"password\": \"alpha\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}users/",
+							"host": [
+								"{{API_URL}}users"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Unauthenticated",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"alpha\",\n    \"name\": \"alpha\",\n    \"email\": \"alpha@gmail.com\",\n    \"contactNumber\": \"8743850717\",\n    \"password\": \"alpha\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}users-old/",
+							"host": [
+								"{{API_URL}}users-old"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}users/1",
+							"host": [
+								"{{API_URL}}users"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64b51384-1dac-4502-be37-1f1f46908f0d",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"alpha446\",\n    \"password\": \"alpha\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}auth/",
+							"host": [
+								"{{API_URL}}auth"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "vehicle",
+			"item": [
+				{
+					"name": "Create Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Blue bus\",\n    \"route\": \"delhi to mumbai\",\n    \"type\": \"BUS\",\n    \"faciliy\": {\n        \"toilet\": true,\n        \"Blanket\": true,\n        \"water\": true\n    },\n    \"rows\": 11,\n    \"colums\": 6,\n    \"layers\": 2,\n    \"seats\": [{\n        \"name\": \"A\",\n        \"layer\": \"1\",\n        \"location\": [\"00\", \"01\", \"02\"],\n        \"price\": 300,\n        \"isBookable\": true,\n        \"specialDetails\": {\n            \"femaleOnly\": true,\n            \"isHAndicapped\": true,\n            \"isDriverSeat\": false\n        }\n    },{\n        \"name\": \"A\",\n        \"layer\": \"1\",\n        \"location\": [\"00\", \"01\", \"02\"],\n        \"price\": 300,\n        \"isBookable\": true,\n        \"specialDetails\": {\n            \"femaleOnly\": true,\n            \"isHAndicapped\": true,\n            \"isDriverSeat\": false\n        }\n    },{\n        \"name\": \"B\",\n        \"layer\": \"1\",\n        \"location\": [\"00\", \"01\", \"02\"],\n        \"price\": 300,\n        \"isBookable\": true,\n        \"specialDetails\": {\n            \"femaleOnly\": true,\n            \"isHAndicapped\": true,\n            \"isDriverSeat\": false\n        }\n    },{\n        \"name\": \"C\",\n        \"layer\": \"1\",\n        \"location\": [\"00\", \"01\", \"02\"],\n        \"price\": 300,\n        \"isBookable\": true,\n        \"specialDetails\": {\n            \"femaleOnly\": true,\n            \"isHAndicapped\": true,\n            \"isDriverSeat\": false\n        }\n    },{\n        \"name\": \"D\",\n        \"layer\": \"1\",\n        \"location\": [\"00\", \"01\", \"02\"],\n        \"price\": 300,\n        \"isBookable\": true,\n        \"specialDetails\": {\n            \"femaleOnly\": true,\n            \"isHAndicapped\": true,\n            \"isDriverSeat\": false\n        }\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}vehicles/",
+							"host": [
+								"{{API_URL}}vehicles"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}vehicles/",
+							"host": [
+								"{{API_URL}}vehicles"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}vehicles/",
+							"host": [
+								"{{API_URL}}vehicles"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Trip",
+			"item": [
+				{
+					"name": "Create Trip",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startTime\": \"2016-10-05T14:48:00.000\",\n    \"endTime\": \"2016-10-05T14:48:00.000\",\n    \"driverDetails\": {\n        \"name\": \"suraj\",\n        \"phoneNumber\": \"mayson\"\n    },\n    \"vehicleId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}trips",
+							"host": [
+								"{{API_URL}}trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get trips",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}trips",
+							"host": [
+								"{{API_URL}}trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get trip detail status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}trips/6/status",
+							"host": [
+								"{{API_URL}}trips"
+							],
+							"path": [
+								"6",
+								"status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get trip detail status",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}trips/6/status",
+									"host": [
+										"{{API_URL}}trips"
+									],
+									"path": [
+										"6",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "425"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a9-zRtDlhSApe/pNQknisSwufOa8JM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Sep 2020 10:56:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bookedSeatCount\": 2,\n    \"bookedSeatList\": [\n        3,\n        4\n    ],\n    \"passengerList\": [\n        {\n            \"name\": \"Lalit\",\n            \"age\": 34,\n            \"contactNumber\": \"8743850717\",\n            \"gender\": \"M\",\n            \"specialDetails\": {\n                \"requiredHomePickup\": true,\n                \"giveWakeupCall\": true\n            },\n            \"seatId\": 3\n        },\n        {\n            \"name\": \"Lalit\",\n            \"age\": 34,\n            \"contactNumber\": \"8743850717\",\n            \"gender\": \"M\",\n            \"specialDetails\": {\n                \"requiredHomePickup\": true,\n                \"giveWakeupCall\": true\n            },\n            \"seatId\": 4\n        }\n    ],\n    \"totalSeatCount\": 5,\n    \"emptySeatList\": [\n        1,\n        2,\n        5\n    ],\n    \"totalSeatList\": [\n        1,\n        2,\n        3,\n        4,\n        5\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "get one trips",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}trips/5",
+							"host": [
+								"{{API_URL}}trips"
+							],
+							"path": [
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update trip",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"BOOKING_START\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}trips/5",
+							"host": [
+								"{{API_URL}}trips"
+							],
+							"path": [
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "booking",
+			"item": [
+				{
+					"name": "create booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payment\": 300,\n    \"tripId\": 6,\n    \"seats\": [3,4],\n    \"passengerDetails\": [{\n        \"name\": \"Lalit\",\n        \"age\": 34,\n        \"contactNumber\": \"8743850717\",\n        \"gender\": \"M\",\n        \"specialDetails\": {\n            \"requiredHomePickup\": true,\n            \"giveWakeupCall\": true\n        }\n    },{\n        \"name\": \"Lalit\",\n        \"age\": 34,\n        \"contactNumber\": \"8743850717\",\n        \"gender\": \"M\",\n        \"specialDetails\": {\n            \"requiredHomePickup\": true,\n            \"giveWakeupCall\": true\n        }\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}bookings/",
+							"host": [
+								"{{API_URL}}bookings"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

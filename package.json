@@ -51,5 +51,7 @@
     "pino-pretty": "^4.1.0",
     "supertest": "^4.0.2"
   },
-  "author": "lalit Chaturvedi <lalit.rhombus@gmail.com> (https://github.com/lalitrhombus)"
+  "author": "lalit Chaturvedi <lalit.rhombus@gmail.com> (https://github.com/lalitrhombus)",
+  "repository": "https://github.com/lalitrhombus/bus-booking",
+  "license": "GNU General Public License v3.0"
 }
