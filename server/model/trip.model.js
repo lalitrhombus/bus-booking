@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 const dbInstance = require('../common/db') && mongoose;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
+import { TRIP_STATUS } from '../common/config';
 
 var tripSchema = new mongoose.Schema({
   startTime: {
@@ -22,7 +23,21 @@ var tripSchema = new mongoose.Schema({
   },
   bookedSeats: {
     type: Array,
+    required: false,
+  },
+  status: {
+    type: String,
     required: true,
+    enum: [
+      TRIP_STATUS.CREATED,
+      TRIP_STATUS.BOOKING_START,
+      TRIP_STATUS.BOOKING_CLOSED,
+      TRIP_STATUS.TRIP_START,
+      TRIP_STATUS.TRIP_COMPLETED,
+      TRIP_STATUS.TRIP_BILLED,
+      TRIP_STATUS.CLOSED,
+      TRIP_STATUS.TERMINATED,
+    ],
   },
   createdBy: {
     type: mongoose.Schema.ObjectId,
@@ -41,7 +56,8 @@ var tripSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-tripSchema.plugin(AutoIncrement, { inc_field: 'tripId' });
+
+tripSchema.plugin(AutoIncrement, { id: 'tripId', inc_field: 'id' });
 var Trip = dbInstance.model('Trip', tripSchema);
 
 export default Trip;

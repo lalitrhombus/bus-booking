@@ -3,6 +3,8 @@ import controller from './controller';
 
 export default express
   .Router()
-  .post('/', controller.create)
   .get('/', controller.all)
-  .get('/:id', controller.byId);
+  .get('/:id/status', controller.details)
+  .get('/:id', controller.byId)
+  .put('/:id', controller.update)
+  .post('/', controller.create);

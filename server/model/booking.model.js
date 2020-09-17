@@ -7,35 +7,25 @@ var passengerSchema = new mongoose.Schema({
     type: String,
     maxlength: 120,
     required: true,
-    unique: true,
   },
   age: {
     type: Number,
     maxlength: 2,
   },
-  contact: {
+  contactNumber: {
     type: Number,
     maxlength: 10,
   },
   gender: {
     type: String,
-    maxlength: 1,
-  },
-  isSeniorCitizen: {
-    type: Boolean,
+    enum: ['M', 'F', 'U'],
   },
   specialDetails: {
-    type: [String],
+    type: [Object],
   },
 });
 
 var bookingSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    maxlength: 120,
-    required: true,
-    unique: true,
-  },
   bookingDate: {
     type: Date,
     required: true,
@@ -44,17 +34,26 @@ var bookingSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  vehicle: {
+  trip: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Vehicle',
+    ref: 'Trip',
     required: true,
+  },
+  status: {
+    type: String,
+    enum: ['CONFIRMED', 'FAILED'],
+    required: true,
+  },
+  details: {
+    type: String,
+    required: false,
   },
   passengerDetails: {
     type: [passengerSchema],
     required: true,
   },
   seats: {
-    type: [String],
+    type: [Number],
     required: true,
   },
   createdBy: {
@@ -75,7 +74,8 @@ var bookingSchema = new mongoose.Schema({
   },
 });
 
-bookingSchema.plugin(AutoIncrement, { inc_field: 'bookingId' });
+bookingSchema.plugin(AutoIncrement, { id: 'bookingId', inc_field: 'id' });
+passengerSchema.plugin(AutoIncrement, { id: 'passengerId', inc_field: 'id' });
 
 var Booking = dbInstance.model('Booking', bookingSchema);
 

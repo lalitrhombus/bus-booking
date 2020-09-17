@@ -6,6 +6,7 @@ class BaseControllerClass {
     this.all = this.all.bind(this);
     this.byId = this.byId.bind(this);
     this.create = this.create.bind(this);
+    this.update = this.update.bind(this);
   }
 
   async all(req, res, next) {
@@ -41,14 +42,43 @@ class BaseControllerClass {
         this.modelName,
         {
           ...req.body,
-          createdBy: res.locals.auth.id,
-          updatedBy: res.locals.auth.id,
+          createdBy: res?.locals?.auth?._id,
+          updatedBy: res?.locals?.auth?._id,
         },
         {
           _id: 0,
           __v: 0,
         }
       );
+      res.json(data);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async update(req, res, next) {
+    try {
+      console.log(req.params.id);
+
+      const rowData = await dbService.findOne(this.modelName, {
+        id: req.params.id,
+      });
+
+      const data = await dbService.update(
+        this.modelName,
+        {
+          _id: rowData._id,
+        },
+        {
+          ...req.body,
+          updatedBy: res.locals.auth._id,
+        },
+        {
+          _id: 0,
+          __v: 0,
+        }
+      );
+
       res.json(data);
     } catch (err) {
       next(err);

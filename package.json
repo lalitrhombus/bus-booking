@@ -1,7 +1,7 @@
 {
-  "name": "bus-booking1",
+  "name": "bus-booking",
   "version": "1.0.0",
-  "description": "My cool app",
+  "description": "application for booking on vehicle",
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
@@ -51,5 +51,5 @@
     "pino-pretty": "^4.1.0",
     "supertest": "^4.0.2"
   },
-  "author": "Carmine DiMascio <cdimascio@gmail.com> (https://github.com/cdimascio)"
+  "author": "lalit Chaturvedi <lalit.rhombus@gmail.com> (https://github.com/lalitrhombus)"
 }
