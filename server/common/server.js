@@ -21,6 +21,7 @@ export default class ExpressServer {
   constructor() {
     const root = path.normalize(`${__dirname}/../..`);
     app.set('appPath', `${root}client`);
+
     app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
     app.use(
       bodyParser.urlencoded({
@@ -35,7 +36,7 @@ export default class ExpressServer {
     app.use(helmet());
     app.use(xss());
     // Stoping static content serving for now
-    // app.use(Express.static(`${root}/public`));
+    app.use(Express.static(`${root}/public`));
   }
 
   router(routes) {

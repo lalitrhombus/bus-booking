@@ -2,32 +2,26 @@ var mongoose = require('mongoose');
 const dbInstance = require('../common/db') && mongoose;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-var userSchema = new mongoose.Schema({
-  userName: {
-    type: String,
-    maxlength: 120,
-    required: true,
-    unique: true,
-  },
-  name: {
-    type: String,
-    maxlength: 120,
+var tripSchema = new mongoose.Schema({
+  startTime: {
+    type: Date,
     required: true,
   },
-  email: {
-    type: String,
-    maxlength: 120,
+  endTime: {
+    type: Date,
     required: true,
   },
-  contactNumber: {
-    type: Number,
-    maxlength: 10,
+  driverDetails: {
+    type: JSON,
     required: true,
   },
-  password: {
-    type: String,
-    minlength: 4,
-    maxlength: 40,
+  vehicle: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Vehicle',
+    required: true,
+  },
+  bookedSeats: {
+    type: Array,
     required: true,
   },
   createdBy: {
@@ -47,8 +41,7 @@ var userSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-userSchema.plugin(AutoIncrement, { id: 'userId', inc_field: 'id' });
+tripSchema.plugin(AutoIncrement, { inc_field: 'tripId' });
+var Trip = dbInstance.model('Trip', tripSchema);
 
-var User = dbInstance.model('User', userSchema);
-
-export default User;
+export default Trip;

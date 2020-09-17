@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 const dbInstance = require('../common/db') && mongoose;
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 var seatSchema = new mongoose.Schema({
   name: {
@@ -23,16 +24,15 @@ var seatSchema = new mongoose.Schema({
     type: Boolean,
   },
   specialDetails: {
-    type: [String],
+    type: Object,
   },
 });
 
 var vehicleSchema = new mongoose.Schema({
-  id: {
+  name: {
     type: String,
     maxlength: 120,
     required: true,
-    unique: true,
   },
   route: {
     type: String,
@@ -79,6 +79,9 @@ var vehicleSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+vehicleSchema.plugin(AutoIncrement, { id: 'vehicleId', inc_field: 'id' });
+seatSchema.plugin(AutoIncrement, { id: 'seatId', inc_field: 'id' });
 
 var Vehicle = dbInstance.model('Vehicle', vehicleSchema);
 

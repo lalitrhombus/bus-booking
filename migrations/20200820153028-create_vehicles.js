@@ -4,7 +4,6 @@ module.exports = {
       [
         {
           id: 'test Bus 1',
-          route: 'Delhi-Mumbai',
           type: 'BUS',
           facility: {
             wifi: true,

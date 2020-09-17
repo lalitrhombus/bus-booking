@@ -3,25 +3,24 @@ let models = require('../../model');
 class Database {
   constructor() {}
 
-  findAll(collection) {
-    return models[collection].find();
+  findAll(collection, options) {
+    return models[collection].find({}, options);
   }
 
-  findOne(collection, condition) {
-    return models[collection].findOne({ ...condition });
+  findOne(collection, condition, options) {
+    return models[collection].findOne({ ...condition }, options);
   }
 
-  create(collection, data) {
+  create(collection, data, options) {
     try {
-      return models[collection].create({ ...data });
+      return models[collection].create({ ...data }, options);
     } catch (err) {
       return err;
     }
   }
 
-  update(collection, condition, data) {
-    models = require('../../model');
-    return models[collection].update({ ...condition }, { ...data });
+  update(collection, condition, data, options) {
+    return models[collection].update({ ...condition }, { ...data }, options);
   }
 }
 

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 const dbInstance = require('../common/db') && mongoose;
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 var passengerSchema = new mongoose.Schema({
   name: {
@@ -73,6 +74,8 @@ var bookingSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+bookingSchema.plugin(AutoIncrement, { inc_field: 'bookingId' });
 
 var Booking = dbInstance.model('Booking', bookingSchema);
 

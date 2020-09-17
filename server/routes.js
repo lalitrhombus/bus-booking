@@ -14,11 +14,12 @@ function errorHandler(err, req, res, next) {
 import vehicleRouter from './api/controllers/vehicle/router';
 import userRouter from './api/controllers/user/router';
 import bookingRouter from './api/controllers/booking/router';
+import tripRouter from './api/controllers/trip/router';
 import authRouter from './api/controllers/auth/router';
 
 function authMiddleware(req, res, next) {
   try {
-    let authHeader = req.headers.authorization.replace('Bearer ', '');
+    let authHeader = req.headers?.authorization?.replace('Bearer ', '');
 
     if (!authHeader) {
       l.info('FORBIDDEN entry..');
@@ -39,9 +40,10 @@ function authMiddleware(req, res, next) {
       });
     }
 
-    const { id, userName, name } = data;
+    const { id, userName, name, _id } = data;
 
     res.locals.auth = {
+      _id,
       id,
       name,
       userName,
@@ -54,10 +56,12 @@ function authMiddleware(req, res, next) {
 }
 
 export default function routes(app) {
-  app.use('/api/v1/vehicle', authMiddleware, vehicleRouter);
-  app.use('/api/v1/booking', authMiddleware, bookingRouter);
-  app.use('/api/v1/user', authMiddleware, userRouter);
+  app.use('/api/v1/users-old', userRouter);
+  app.use('/api/v1/users', authMiddleware, userRouter); // TODO: add authentication
   app.use('/api/v1/auth', authRouter);
+  app.use('/api/v1/vehicles', authMiddleware, vehicleRouter);
+  app.use('/api/v1/bookings', authMiddleware, bookingRouter);
+  app.use('/api/v1/trips', authMiddleware, tripRouter);
   app.use(logErrors);
   app.use(errorHandler);
 }

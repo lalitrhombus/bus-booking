@@ -21,6 +21,7 @@ export class Controller {
           userName,
           id: data.id,
           name: data.name,
+          _id: data._id,
         },
         process.env.SECRET_KEY,
         {
