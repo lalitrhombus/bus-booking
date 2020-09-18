@@ -4,7 +4,7 @@ import Server from '../server';
 
 const expect = chai.expect;
 
-let userName, token, tripId;
+let userName, token, bookingId, tripId;
 
 describe('Test Trip module', () => {
   it('should create users using Unauthenticated Methord..', () =>
@@ -38,7 +38,6 @@ describe('Test Trip module', () => {
         expect(r.body.userName).equal(userName);
         token = r.body.token;
       }));
-
   it('Should be able to create Trip', () =>
     request(Server)
       .post('/api/v1/trips/')
@@ -60,9 +59,47 @@ describe('Test Trip module', () => {
         tripId = r.body.id;
       }));
 
-  it('Should be able to get list of all Trips', () =>
+  it('Should be able to create Booking', () =>
     request(Server)
-      .get('/api/v1/trips/')
+      .post('/api/v1/bookings/')
+      .set('Authorization', token)
+      .send({
+        payment: 300,
+        tripId: tripId,
+        seats: [3, 4],
+        passengerDetails: [
+          {
+            name: 'Lalit',
+            age: 34,
+            contactNumber: '8743850717',
+            gender: 'M',
+            specialDetails: {
+              requiredHomePickup: true,
+              giveWakeupCall: true,
+            },
+          },
+          {
+            name: 'Lalit',
+            age: 34,
+            contactNumber: '8743850717',
+            gender: 'M',
+            specialDetails: {
+              requiredHomePickup: true,
+              giveWakeupCall: true,
+            },
+          },
+        ],
+      })
+      .expect('Content-Type', /json/)
+      .then((r) => {
+        expect(r.status).equals(200);
+        expect(r.body).to.be.an.an('object');
+        bookingId = r.body.id;
+      }));
+
+  it('Should be able to get list of all bookings', () =>
+    request(Server)
+      .get('/api/v1/bookings/')
       .set('Authorization', token)
       .expect('Content-Type', /json/)
       .then((r) => {
@@ -70,42 +107,14 @@ describe('Test Trip module', () => {
         expect(r.body).to.be.an.an('array');
       }));
 
-  it('Should be able to get single Trips', () =>
+  it('Should be able to get single bookings', () =>
     request(Server)
-      .get(`/api/v1/trips/${tripId}`)
+      .get(`/api/v1/bookings/${bookingId}`)
       .set('Authorization', token)
       .expect('Content-Type', /json/)
       .then((r) => {
         expect(r.status).equals(200);
         expect(r.body).to.be.an.an('object');
-        expect(r.body.startTime).equal('2016-10-05T09:18:00.000Z');
-        expect(r.body.status).equal('CREATED');
-        expect(r.body.id).equal(tripId);
-      }));
-
-  it('Should be able to update Trip detials', () =>
-    request(Server)
-      .put(`/api/v1/trips/${tripId}`)
-      .set('Authorization', token)
-      .send({
-        status: 'BOOKING_START',
-      })
-      .expect('Content-Type', /json/)
-      .then((r) => {
-        expect(r.status).equals(200);
-        expect(r.body).to.be.an.an('object');
-      }));
-
-  it('Should be able to get updated trip Data', () =>
-    request(Server)
-      .get(`/api/v1/trips/${tripId}`)
-      .set('Authorization', token)
-      .expect('Content-Type', /json/)
-      .then((r) => {
-        expect(r.status).equals(200);
-        expect(r.body).to.be.an.an('object');
-        expect(r.body.startTime).equal('2016-10-05T09:18:00.000Z');
-        expect(r.body.status).equal('BOOKING_START');
-        expect(r.body.id).equal(tripId);
+        expect(r.body.id).equal(bookingId);
       }));
 });
