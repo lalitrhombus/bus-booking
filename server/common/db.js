@@ -23,7 +23,6 @@ const getDBInstance = async () => {
   } catch (err) {
     // TODO: add a retry machanish here, or may be an alternative source of data
     l.error(err);
-    console.log('i am here');
     return null;
   }
 };

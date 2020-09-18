@@ -20,7 +20,6 @@ class Database {
   }
 
   update(collection, condition, data, options) {
-    console.log(data);
     return models[collection].updateOne(
       { ...condition },
       { $set: { ...data } },

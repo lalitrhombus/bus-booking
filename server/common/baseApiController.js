@@ -58,8 +58,6 @@ class BaseControllerClass {
 
   async update(req, res, next) {
     try {
-      console.log(req.params.id);
-
       const rowData = await dbService.findOne(this.modelName, {
         id: req.params.id,
       });
